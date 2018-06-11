@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import * as CategoryActions from "../actions/categories";
 import * as PostActions from "../actions/posts";
 import * as CommentsActions from "../actions/comments";
+import * as SortActions from "../actions/sort";
 
 function categories(state = {}, action) {
   switch (action.type) {
@@ -90,7 +91,34 @@ function comments(state = {}, action) {
       return {
         ...state
       };
+    default:
+      return state;
+  }
+}
 
+function sort(state = {'sortComments': 'voteScore', 'sortPosts': 'voteScore'}, action) {
+  switch (action.type) {
+    case SortActions.POST_SORT_VOTESCORE:
+      return {
+        ...state,
+        sortPosts: "voteScore"
+      };
+    case SortActions.POST_SORT_TIMESTAMP:
+      return {
+        ...state,
+        sortPosts: "date"
+      };
+    case SortActions.COMMENT_SORT_VOTESCORE:
+      return {
+        ...state,
+        sortComments: "voteScore"
+      };
+
+    case SortActions.COMMENT_SORT_TIMESTAMP:
+      return {
+        ...state,
+        sortComments: "date"
+      };
     default:
       return state;
   }
@@ -99,5 +127,6 @@ function comments(state = {}, action) {
 export default combineReducers({
   categories,
   posts,
-  comments
+  comments,
+  sort
 });

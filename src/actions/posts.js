@@ -6,8 +6,6 @@ export const POST_OPENED = "POST_OPENED";
 export const DELETED_SUCCESS = "DELETED_SUCCESS";
 export const UPDATE_SUCESSFUL = "UPDATE_SUCESSFUL";
 export const SAVE_SUCESSFUL = "SAVE_SUCESSFUL";
-// export const POST_SORT_VOTESCORE = "POST_SORT_VOTESCORE";
-// export const POST_SORT_TIMESTAMP = "POST_SORT_TIMESTAMP";
 
 export function postsOpened(posts) {
   return {
@@ -50,18 +48,6 @@ export function updateSucessful(post) {
     post
   };
 }
-
-// export function postSortVoteScore() {
-//   return {
-//       type: POST_SORT_VOTESCORE
-//   };
-// }
-
-// export function postSortTimestamp() {
-//   return {
-//       type: POST_SORT_TIMESTAMP
-//   };
-// }
 
 export function getPosts() {
   return dispatch => {
