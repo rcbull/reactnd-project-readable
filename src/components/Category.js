@@ -13,13 +13,6 @@ class Category extends Component {
     const { category } = this.props.match.params;
     const { posts } = this.props;
 
-    let filterPosts;
-    if (posts) {
-      filterPosts = Object.keys(posts).reduce(function(p, c) {
-        if (posts[c].category === category) p[c] = posts[c];
-        return p;
-      }, {});
-    }
     return (
       <Grid fluid>
         <Row>
@@ -36,7 +29,7 @@ class Category extends Component {
         </Row>
         <Row center="xs">
           <Col xs={6}>
-            <Posts filterPosts={filterPosts} category={category} />
+            <Posts filterPosts={posts} category={category} />
           </Col>
         </Row>
       </Grid>

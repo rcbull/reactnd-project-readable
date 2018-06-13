@@ -24,7 +24,7 @@ class Post extends Component {
   showComments(comments, show, parentId) {
     return comments && show ? (
       <Grid fluid>
-        <Comments parentId={parentId} />
+        <Comments parentId={parentId} key={parentId}/>
       </Grid>
     ) : (
       <div />
@@ -146,7 +146,7 @@ const mapStateToProps = (state, ownProps) => {
     post: { ...state.posts[ownProps.match.params.id] },
     // comments: state.comments
     comments: Api.toArray(state.comments).filter(
-      comment => comment.parentId === postId
+      comment => comment.parentId === postId && comment.deleted === false
     )
   };
 };

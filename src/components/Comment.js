@@ -6,6 +6,7 @@ import Timestamp from "react-timestamp";
 import * as CommentActions from "../actions/comments";
 import CommentForm from "../components/CommentForm";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 
 class Comment extends Component {
   render() {
@@ -60,6 +61,8 @@ class Comment extends Component {
             </Col>
           </Row>
         </Grid>
+        <br />
+        <Divider />
       </div>
     ) : (
       <div>No comment</div>
