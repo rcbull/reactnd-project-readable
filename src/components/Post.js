@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 
 class Post extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getPostComments(this.props.id);
   }
 
@@ -43,7 +43,6 @@ class Post extends Component {
       showAddComment
     } = this.props;
 
-    console.log("post", this.props, showAddComment);
     let p = Object.keys(posts)
       .map(key => posts[key])
       .find(b => b.id === id);
@@ -144,7 +143,6 @@ const mapStateToProps = (state, ownProps) => {
     postId: postId,
     id: postId,
     post: { ...state.posts[ownProps.match.params.id] },
-    // comments: state.comments
     comments: Api.toArray(state.comments).filter(
       comment => comment.parentId === postId && comment.deleted === false
     )

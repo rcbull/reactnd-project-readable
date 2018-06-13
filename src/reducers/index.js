@@ -19,15 +19,10 @@ function posts(state = {}, action) {
       return action.posts;
     case PostActions.DELETED_SUCCESS:
       action.post.deleted = true;
-      Object.assign(
-        Object.keys(state)
-          .map(key => state[key])
-          .find(b => b.id === action.post.id),
-        action.post
-      );
-      return {
-        ...state
-      };
+      const posts = Object.keys(state)
+        .map(key => state[key])
+        .filter(post => post.id !== action.post.id);
+      return [...posts];
     case PostActions.POST_OPENED:
       return {
         ...state,
@@ -45,9 +40,7 @@ function posts(state = {}, action) {
           .find(b => b.id === action.post.id),
         action.post
       );
-      return {
-        ...state
-      };
+      return [...state];
     case PostActions.SAVE_SUCESSFUL:
       return {
         ...state,
@@ -72,14 +65,11 @@ function comments(state = {}, action) {
       };
     case CommentsActions.COMMENT_DELETED_SUCCESS:
       action.comment.deleted = true;
-      Object.assign(
-        Object.keys(state)
-          .map(key => state[key])
-          .find(b => b.id === action.comment.id),
-        action.comment
-      );
+      const comments = Object.keys(state)
+        .map(key => state[key])
+        .filter(comment => comment.id !== action.comment.id);
       return {
-        ...state
+        ...comments
       };
     case CommentsActions.COMMENT_UPDATE_SUCESSFUL:
       Object.assign(
@@ -96,7 +86,10 @@ function comments(state = {}, action) {
   }
 }
 
-function sort(state = {'sortComments': 'voteScore', 'sortPosts': 'voteScore'}, action) {
+function sort(
+  state = { sortComments: "voteScore", sortPosts: "voteScore" },
+  action
+) {
   switch (action.type) {
     case SortActions.POST_SORT_VOTESCORE:
       return {

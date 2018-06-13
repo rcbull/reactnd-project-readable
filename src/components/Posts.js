@@ -7,6 +7,16 @@ import * as SortActions from "../actions/sort";
 import * as Api from "../Api";
 
 class Posts extends Component {
+  setStyleByVoteScore = () => {
+    if (this.props.sortPosts === "voteScore") return { color: "#FF0000" };
+    return { color: "#00000" };
+  };
+
+  setStyleByDate = () => {
+    if (this.props.sortPosts === "voteScore") return { color: "#00000" };
+    return { color: "#FF0000" };
+  };
+
   render() {
     let {
       posts,
@@ -33,8 +43,8 @@ class Posts extends Component {
         <h3>All Posts</h3>
         <br />
         <div>
-          (Sort By <a onClick={() => postSortVoteScore()}>Votes</a> -{" "}
-          <a onClick={() => postSortTimestamp()}>Date</a>)
+          (Sort By <a style={this.setStyleByVoteScore()} onClick={() => postSortVoteScore()}>Votes</a> -{" "}
+          <a style={this.setStyleByDate()} onClick={() => postSortTimestamp()}>Date</a>)
         </div>
         <br />
         <br />
@@ -53,7 +63,6 @@ class Posts extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     posts: state.posts,
     sortPosts: state.sort.sortPosts

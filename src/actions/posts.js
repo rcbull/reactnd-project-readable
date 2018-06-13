@@ -81,7 +81,6 @@ export function getPost(postId) {
         return res.json();
       })
       .then(post => {
-        console.log("postActions ", post);
         dispatch(postOpened(Api.toArray(post, "id")));
       })
       .catch(error => console.error(error));
@@ -158,7 +157,6 @@ export function getPostsByCategory(categoryId) {
         return res.json();
       })
       .then(posts => {
-        console.log("posts API", posts);
         dispatch(postsCategoryOpened(Api.toArray(posts, "id")));
       })
       .catch(error => console.error(error));

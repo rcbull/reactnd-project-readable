@@ -130,7 +130,6 @@ class PostForm extends Component {
     this.setState({ selectedOption });
     // selectedOption can be null when the `x` (close) button is clicked
     if (selectedOption) {
-      console.log(`Selected: ${selectedOption.label}`);
 
       this.setState({ category: selectedOption.label });
     }
