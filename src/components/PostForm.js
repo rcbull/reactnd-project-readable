@@ -90,14 +90,6 @@ class PostForm extends Component {
         p.id = uuidv1();
         this.props.addPost(p);
       }
-
-      this.setState({
-        title: "",
-        author: "",
-        body: "",
-        category: "",
-        voteScore: 0
-      });
     }
   }
 
