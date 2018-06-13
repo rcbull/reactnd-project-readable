@@ -6,10 +6,18 @@ export const POST_OPENED = "POST_OPENED";
 export const DELETED_SUCCESS = "DELETED_SUCCESS";
 export const UPDATE_SUCESSFUL = "UPDATE_SUCESSFUL";
 export const SAVE_SUCESSFUL = "SAVE_SUCESSFUL";
+export const POST_FILTERED = "POST_FILTERED";
 
 export function postsOpened(posts) {
   return {
     type: "POSTS_OPENED",
+    posts
+  };
+}
+
+export function postFiltered(posts) {
+  return {
+    type: "POST_FILTERED",
     posts
   };
 }
@@ -63,6 +71,36 @@ export function getPosts() {
       })
       .then(posts => {
         dispatch(postsOpened(Api.toArray(posts, "id")));
+      })
+      .catch(error => console.error(error));
+  };
+}
+
+export function getPostsFilter(criteria) {
+  return dispatch => {
+    Api.getPosts()
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res;
+      })
+      .then(res => {
+        return res.json();
+      })
+      .then(posts => {
+        console.log(posts)
+        if (criteria) {
+          console.log(
+            posts = Object.keys(posts)
+              .map(key => posts[key])
+              .filter(b =>
+                b.title.toUpperCase().startsWith(criteria.toUpperCase())
+              )
+          );
+        }
+
+        dispatch(postFiltered(Api.toArray(posts, "id")));
       })
       .catch(error => console.error(error));
   };

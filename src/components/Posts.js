@@ -9,11 +9,11 @@ import * as Api from "../Api";
 class Posts extends Component {
   setStyleByVoteScore = () => {
     if (this.props.sortPosts === "voteScore") return { color: "#FF0000" };
-    return { color: "#00000" };
+    return { color: "#000000" };
   };
 
   setStyleByDate = () => {
-    if (this.props.sortPosts === "voteScore") return { color: "#00000" };
+    if (this.props.sortPosts === "voteScore") return { color: "#000000" };
     return { color: "#FF0000" };
   };
 

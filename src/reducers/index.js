@@ -17,6 +17,8 @@ function posts(state = {}, action) {
   switch (action.type) {
     case PostActions.POSTS_OPENED:
       return action.posts;
+    case PostActions.POST_FILTERED:
+      return action.posts;
     case PostActions.DELETED_SUCCESS:
       action.post.deleted = true;
       const posts = Object.keys(state)
