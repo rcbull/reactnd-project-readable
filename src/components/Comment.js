@@ -67,13 +67,11 @@ class Comment extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    comments: state.comments,
-    comment: { ...state.comments[ownProps.match.params.id] },
+const mapStateToProps = ({comments}, ownProps) => ({
+    comments,
+    comment: { ...comments[ownProps.match.params.id] },
     parentId: ownProps.match.params.parentId
-  };
-}
+})
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

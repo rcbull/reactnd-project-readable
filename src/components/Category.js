@@ -44,9 +44,13 @@ class Category extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const { category } = ownProps.match.params;
   return {
-    posts: state.posts,
+    posts: Object.keys(state.posts).reduce(function(p, c) {
+      if (state.posts[c].category === category) p[c] = state.posts[c];
+      return p;
+    }, {}),
     categories: state.categories
   };
 };
