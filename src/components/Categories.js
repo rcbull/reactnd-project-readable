@@ -30,7 +30,7 @@ class Categories extends Component {
               button
               component="a"
               key={key}
-              href={"/" + categories[key].path}
+              onClick={() => this.props.history.push('/'+categories[key].path)}
             >
               <ListItemText primary={categories[key].name} />
             </ListItem>
