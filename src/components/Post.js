@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import * as Api from "../Api";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import Timestamp from "react-timestamp";
@@ -95,7 +96,7 @@ class Post extends Component {
               </Row>
               <Row center="xs">
                 <Col xs={4}>
-                  Comments: {p.commentCount}
+                  Comments: {Object.keys(comments).length}
                   <div>
                     <PostForm post={p} edit={true} />
                   </div>
@@ -143,7 +144,10 @@ const mapStateToProps = (state, ownProps) => {
     postId: postId,
     id: postId,
     post: { ...state.posts[ownProps.match.params.id] },
-    comments: state.comments
+    // comments: state.comments
+    comments: Api.toArray(state.comments).filter(
+      comment => comment.parentId === postId
+    )
   };
 };
 
