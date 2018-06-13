@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, withRouter, Route } from "react-router-dom";
+import { Link, withRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Category from "./components/Category";
 import Post from "./components/Post.js";
 import * as CategoryActions from "./actions/categories";
 import * as PostActions from "./actions/posts";
+import Page404 from "./components/Page404";
 
 import "./App.css";
 
@@ -24,9 +25,12 @@ class App extends Component {
         </header>
 
         <main>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/:category" component={Category} />
-          <Route exact path="/:category/:id" component={Post} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:category" component={Category} />
+            <Route exact path="/:category/:id" component={Post} />
+            <Route component={Page404} />
+          </Switch>
         </main>
       </div>
     );
