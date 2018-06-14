@@ -90,6 +90,9 @@ class PostForm extends Component {
         p.id = uuidv1();
         this.props.addPost(p);
       }
+      this.setState({
+        modalIsOpen: false
+      });
     }
   }
 
@@ -130,7 +133,6 @@ class PostForm extends Component {
     this.setState({ selectedOption });
     // selectedOption can be null when the `x` (close) button is clicked
     if (selectedOption) {
-
       this.setState({ category: selectedOption.label });
     }
   };
@@ -228,11 +230,12 @@ class PostForm extends Component {
 }
 
 const mapStateToProps = state => {
-  const categoriesOption = Api
-    .toArray(state.categories)
-    .reduce((acc, category) => {
+  const categoriesOption = Api.toArray(state.categories).reduce(
+    (acc, category) => {
       return [...acc, { value: category.name, label: category.name }];
-    }, []);
+    },
+    []
+  );
   return {
     posts: state.posts,
     categories: state.categories,
