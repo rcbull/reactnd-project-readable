@@ -31,28 +31,28 @@ export function postsCategoryOpened(posts) {
 
 export function postOpened(post) {
   return {
-    type: POST_OPENED,
+    type: "POST_OPENED",
     post
   };
 }
 
 export function deletedSuccess(post) {
   return {
-    type: DELETED_SUCCESS,
+    type: "DELETED_SUCCESS",
     post
   };
 }
 
 export function saveSuccess(post) {
   return {
-    type: SAVE_SUCESSFUL,
+    type: "SAVE_SUCESSFUL",
     post
   };
 }
 
 export function updateSucessful(post) {
   return {
-    type: UPDATE_SUCESSFUL,
+    type: "UPDATE_SUCESSFUL",
     post
   };
 }

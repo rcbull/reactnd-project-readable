@@ -14,21 +14,21 @@ export function commentsOpened(comments) {
 
 export function deletedCommentSuccess(comment) {
   return {
-    type: COMMENT_DELETED_SUCCESS,
+    type: "COMMENT_DELETED_SUCCESS",
     comment
   };
 }
 
-export function commentSaveSuccess(comment) {
+export function commentSaveSucessful(comment) {
   return {
-    type: COMMENT_SAVE_SUCESSFUL,
+    type: "COMMENT_SAVE_SUCESSFUL",
     comment
   };
 }
 
 export function commentUpdateSucessful(comment) {
   return {
-    type: COMMENT_UPDATE_SUCESSFUL,
+    type: "COMMENT_UPDATE_SUCESSFUL",
     comment
   };
 }
@@ -84,7 +84,7 @@ export function addComment(comment) {
         return res.json();
       })
       .then(comment => {
-        dispatch(commentSaveSuccess(comment));
+        dispatch(commentSaveSucessful(comment));
       })
       .catch(error => console.error(error));
   };
