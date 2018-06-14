@@ -88,10 +88,6 @@ class CommentForm extends Component {
       c.id = uuidv1();
       this.props.addComment(c);
     }
-    this.setState({
-      author: "",
-      body: ""
-    });
   }
 
   componentWillMount() {

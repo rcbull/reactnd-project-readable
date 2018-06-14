@@ -24,7 +24,7 @@ class Post extends Component {
   showComments(comments, show, parentId) {
     return comments && show ? (
       <Grid fluid>
-        <Comments parentId={parentId} key={parentId}/>
+        <Comments parentId={parentId} key={parentId} />
       </Grid>
     ) : (
       <div />
@@ -107,7 +107,10 @@ class Post extends Component {
                 </Col>
                 <Col xs={4}>
                   <Button
-                    onClick={() => deletePost(p)}
+                    onClick={() => {
+                      deletePost(p);
+                      this.props.history.push("/");
+                    }}
                     variant="raised"
                     color="primary"
                   >

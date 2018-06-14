@@ -62,12 +62,7 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    posts: state.posts,
-    sortPosts: state.sort.sortPosts
-  };
-};
+const mapStateToProps = ({posts, sort}) => ({ posts, sortPosts: sort.sortPosts });
 
 const mapDispatchToProps = dispatch => {
   return {
