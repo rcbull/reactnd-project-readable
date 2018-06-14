@@ -20,6 +20,8 @@ class Home extends Component {
       criteria
     });
     localStorage.criteria = criteria;
+
+    this.props.getPostsFilter(localStorage.criteria);
   };
 
   filter() {

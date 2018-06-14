@@ -30,9 +30,6 @@ class Posts extends Component {
     }
 
     if (Object.keys(posts).length > 1) {
-      // filter deleted itens
-      posts = Api.toArray(posts).filter(post => post.deleted === false);
-
       //sorting posts
       posts = Api.sortArray(Api.toArray(posts), sortPosts);
     }
@@ -43,8 +40,17 @@ class Posts extends Component {
         <h3>All Posts</h3>
         <br />
         <div>
-          (Sort By <a style={this.setStyleByVoteScore()} onClick={() => postSortVoteScore()}>Votes</a> -{" "}
-          <a style={this.setStyleByDate()} onClick={() => postSortTimestamp()}>Date</a>)
+          (Sort By{" "}
+          <a
+            style={this.setStyleByVoteScore()}
+            onClick={() => postSortVoteScore()}
+          >
+            Votes
+          </a>{" "}
+          -{" "}
+          <a style={this.setStyleByDate()} onClick={() => postSortTimestamp()}>
+            Date
+          </a>)
         </div>
         <br />
         <br />
@@ -62,7 +68,10 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = ({posts, sort}) => ({ posts, sortPosts: sort.sortPosts });
+const mapStateToProps = ({ posts, sort }) => ({
+  posts: Api.sortArray(Api.toArray(posts), sort.sortPosts),
+  sortPosts: sort.sortPosts
+});
 
 const mapDispatchToProps = dispatch => {
   return {
