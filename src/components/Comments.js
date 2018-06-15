@@ -6,14 +6,30 @@ import Comment from "./Comment";
 import * as SortActions from "../actions/sort";
 
 class Comments extends Component {
+  setStyleByVoteScore = () => {
+    if (this.props.sortComments === "voteScore") return { color: "#FF0000" };
+    return { color: "#000000" };
+  };
+
+  setStyleByDate = () => {
+    if (this.props.sortComments === "voteScore") return { color: "#000000" };
+    return { color: "#FF0000" };
+  };
+
   render() {
-    const { commentSortVoteScore, commentSortTimestamp, sortComments } = this.props;
+    const {
+      commentSortVoteScore,
+      commentSortTimestamp,
+      sortComments
+    } = this.props;
     let { comments } = this.props;
 
     //sorting comments
     if (Object.keys(comments).length > 1) {
       // filter deleted itens
-      comments = Api.toArray(comments).filter(comments => comments.deleted === false);
+      comments = Api.toArray(comments).filter(
+        comments => comments.deleted === false
+      );
 
       //sorting comments
       comments = Api.sortArray(Api.toArray(comments), sortComments);
@@ -22,8 +38,20 @@ class Comments extends Component {
     return comments ? (
       <div>
         <div>
-          (Sort By <a onClick={() => commentSortVoteScore()}>Votes</a> -{" "}
-          <a onClick={() => commentSortTimestamp()}>Date</a>)
+          (Sort Comments By{" "}
+          <a
+            style={this.setStyleByVoteScore()}
+            onClick={() => commentSortVoteScore()}
+          >
+            Votes
+          </a>{" "}
+          -{" "}
+          <a
+            style={this.setStyleByDate()}
+            onClick={() => commentSortTimestamp()}
+          >
+            Date
+          </a>)
         </div>
         <br />
         <br />
@@ -37,13 +65,13 @@ class Comments extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const comments = Api.toArray(state.comments).filter(
-    comment => comment.parentId === ownProps.parentId
-  );
+const mapStateToProps = ({ comments, sort }, ownProps) => {
   return {
-    comments,
-    parentId: ownProps.parentId
+    comments: Api.sortArray(Api.toArray(comments).filter(
+      comment => comment.parentId === ownProps.parentId
+    ), sort.sortComments),
+    parentId: ownProps.parentId,
+    sortComments: sort.sortComments
   };
 };
 

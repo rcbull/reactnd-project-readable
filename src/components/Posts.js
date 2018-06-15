@@ -40,7 +40,7 @@ class Posts extends Component {
         <h3>All Posts</h3>
         <br />
         <div>
-          (Sort By{" "}
+          (Sort Post By{" "}
           <a
             style={this.setStyleByVoteScore()}
             onClick={() => postSortVoteScore()}
