@@ -3,6 +3,7 @@ import * as CategoryActions from "../actions/categories";
 import * as PostActions from "../actions/posts";
 import * as CommentsActions from "../actions/comments";
 import * as SortActions from "../actions/sort";
+import * as Api from "../Api";
 
 function categories(state = {}, action) {
   switch (action.type) {
@@ -16,7 +17,9 @@ function categories(state = {}, action) {
 function posts(state = {}, action) {
   switch (action.type) {
     case PostActions.POSTS_OPENED:
-      return action.posts;
+      state = Api.mergeArrays([Api.toArray(state), action.posts], "id");
+
+      return state;
     case PostActions.POST_FILTERED:
       return action.posts;
     case PostActions.DELETED_SUCCESS:
@@ -42,7 +45,7 @@ function posts(state = {}, action) {
           .find(b => b.id === action.post.id),
         action.post
       );
-      return [...state];
+      return {...state};
     case PostActions.SAVE_SUCESSFUL:
       return {
         ...state,
@@ -56,10 +59,17 @@ function posts(state = {}, action) {
 function comments(state = {}, action) {
   switch (action.type) {
     case CommentsActions.COMMENTS_OPENED:
-      return {
-        ...state,
-        ...action.comments
-      };
+      // state = [
+      //   ...new Set(
+      //     Object.keys(state)
+      //       .map(key => state[key])
+      //       .concat(action.comments)
+      //   )
+      // ];
+
+      state = Api.mergeArrays([Api.toArray(state), action.comments], "id");
+
+      return state;
     case CommentsActions.COMMENT_SAVE_SUCESSFUL:
       return {
         ...state,

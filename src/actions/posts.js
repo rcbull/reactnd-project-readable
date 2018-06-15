@@ -89,15 +89,12 @@ export function getPostsFilter(criteria) {
         return res.json();
       })
       .then(posts => {
-        console.log(posts)
         if (criteria) {
-          console.log(
-            posts = Object.keys(posts)
-              .map(key => posts[key])
-              .filter(b =>
-                b.title.toUpperCase().startsWith(criteria.toUpperCase())
-              )
-          );
+          posts = Object.keys(posts)
+            .map(key => posts[key])
+            .filter(b =>
+              b.title.toUpperCase().startsWith(criteria.toUpperCase())
+            );
         }
 
         dispatch(postFiltered(Api.toArray(posts, "id")));

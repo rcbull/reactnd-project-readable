@@ -107,3 +107,22 @@ export function toArray(obj) {
 export function sortArray(arr, field) {
   return arr.sort((a, b) => a[field] < b[field]);
 }
+
+export function arrayToObject(arr, key) {
+  return arr.reduce(function(map, obj) {
+    map[obj[key]] = obj;
+    return map;
+  }, {});
+}
+
+export function mergeArrays(arrays, prop) {
+  const merged = {};
+
+  arrays.forEach(arr => {
+    arr.forEach(item => {
+      merged[item[prop]] = Object.assign({}, merged[item[prop]], item);
+    });
+  });
+
+  return Object.values(merged);
+}
